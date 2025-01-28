@@ -1,9 +1,9 @@
-from tensorflow.python.keras.models import load_model
+from tf_keras.models import load_model
 import numpy as np
-from tensorflow.python.keras.models import Sequential 
-from tensorflow.python.keras.layers import Dense, Dropout, Activation, Flatten 
-from tensorflow.python.keras.layers import Conv2D, MaxPooling2D 
-
+from tf_keras.models import Sequential 
+from tf_keras.layers import Dense, Dropout, Activation, Flatten 
+from tf_keras.layers import Conv2D, MaxPooling2D 
+import tensorflow as tf
 # Define the number of classes
 model = None
 num_classes = 3
@@ -49,11 +49,21 @@ def loadWeight(file_dir):
 	model.load_weights(file_dir)
 	
 def predict_class(image):
-	global model
-	index_label = model.predict_classes(image)[0]
-	return index_label
+    global model
+    # Dự đoán đầu ra với mô hình, trả về xác suất của tất cả các lớp
+    predictions = model.predict(image)
+    
+    # Lấy chỉ số của lớp có xác suất cao nhất
+    index_label = np.argmax(predictions, axis=1)[0]
+    
+    return index_label
 	
 def predict(image):
 	global model
 	acc = model.predict(image)[0];
 	return acc
+
+def saveModel(file_dir):
+    global model
+    model.save("/home/haisgirl/Documents/mycode/Python/SmartGlassesForTheBlind/mymodels/model.h5")
+

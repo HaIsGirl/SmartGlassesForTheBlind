@@ -73,7 +73,7 @@ while True:
                 test_image = rawCapture.array
                 # Xu ly anh
                 start_time1 = time.time()
-                test_image2 = test_image;
+                test_image2 = test_image
                 
                 
                 test_image = cv2.cvtColor(test_image, cv2.COLOR_BGR2GRAY)
@@ -87,9 +87,10 @@ while True:
                 test_image /= 255
 
                 test_image = test_image.reshape(1,128,128,1)
+                '''Dòng mã test_image = test_image.reshape(1, 128, 128, 1) sử dụng phương thức reshape() của numpy để thay đổi hình dạng của mảng test_image. Cụ thể, nó thay đổi mảng ảnh từ dạng hiện tại thành một dạng mới với kích thước (1, 128, 128, 1).'''
                 # Du doan duong di
                 value = DetectWay.predict_class(test_image)
-                direction = directions[value];
+                direction = directions[value]
                 print("This is: "+direction)
                 finish_time1 = time.time()
                 print("Total detectway-time: %f s", finish_time1 - start_time1)                
